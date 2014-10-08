@@ -51,4 +51,8 @@ public class Item implements Comparable<Item> {
     public int compareTo(Item another) {
         return Integer.compare(quantity, another.quantity);
     }
+
+    public Product product() {
+        return product;
+    }
 }

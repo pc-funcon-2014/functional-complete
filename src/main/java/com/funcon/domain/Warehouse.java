@@ -17,41 +17,24 @@ public class Warehouse {
         return this;
     }
 
-    public void products(final SearchCriteria<Product> criteria) {
-        for (Item item : items) {
-            final Product product = item.product;
-            if (criteria.test(product)) {
-                System.out.println(product.name);
-            }
-        }
-    }
-
     public void products(final String name) {
-        products(matching(name));
-    }
-
-    private SearchCriteria<Product> matching(final String name) {
-        return product -> product.name.equals(name);
+        items.stream()
+                .map(Item::product)
+                .filter(product -> product.name.equals(name))
+                .forEach(System.out::println);
     }
 
     public void inventory() {
-        inventory(Item::isInStock);
+        items.stream().filter(Item::isInStock)
+                .map(Item::name)
+                .forEach(System.out::println);
     }
 
     public void inventory(final Category category) {
-        inventory(ofCategory(category));
-    }
-
-    private SearchCriteria<Item> ofCategory(final Category category) {
-        return item -> item.isInStock() && item.isOf(category);
-    }
-
-    public void inventory(SearchCriteria<Item> criteria) {
-        for (Item item : items) {
-            if (criteria.test(item)) {
-                System.out.println(item.name());
-            }
-        }
+        items.stream()
+                .filter(item -> item.isInStock() && item.isOf(category))
+                .map(Item::name)
+                .forEach(System.out::println);
     }
 
 }
