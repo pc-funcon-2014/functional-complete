@@ -1,6 +1,5 @@
 package com.funcon.domain;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ public class Warehouse {
     }
 
     public void products(final SearchCriteria<Product> criteria) {
-        Collection<Product> products = new HashSet<>();
         for (Item item : items) {
             final Product product = item.product;
             if (criteria.test(product)) {
@@ -39,12 +37,7 @@ public class Warehouse {
     }
 
     private SearchCriteria<Product> matching(final String name) {
-        return new SearchCriteria<Product>() {
-            @Override
-            public boolean test(Product product) {
-                return product.name.equals(name);
-            }
-        };
+        return (Product product) -> product.name.equals(name);
     }
 
     public void inventory() {
@@ -56,12 +49,7 @@ public class Warehouse {
     }
 
     private SearchCriteria<Item> ofCategory(final Category category) {
-        return new SearchCriteria<Item>() {
-            @Override
-            public boolean test(Item item) {
-                return item.isInStock() && item.isOf(category);
-            }
-        };
+        return (Item item) -> item.isInStock() && item.isOf(category);
     }
 
     public void inventory(SearchCriteria<Item> criteria) {
