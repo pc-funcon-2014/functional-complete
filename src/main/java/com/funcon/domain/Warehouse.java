@@ -1,10 +1,11 @@
 package com.funcon.domain;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import static java.util.Comparator.naturalOrder;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Warehouse {
@@ -56,7 +57,7 @@ public class Warehouse {
     public static Optional<Item> findItemWithLeastQuantity(Set<Warehouse> warehouses) {
         return warehouses.stream()
                 .flatMap(Warehouse::items)
-                .min(Comparator.<Item>naturalOrder());
+                .min(naturalOrder());
     }
 
     private Stream<Item> items() {
