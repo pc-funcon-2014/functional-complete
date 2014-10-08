@@ -37,4 +37,11 @@ public class Warehouse {
                 .forEach(System.out::println);
     }
 
+    public int numberOfItems() {
+        return items.stream()
+                .reduce(0,
+                        (acc, item) -> acc + item.quantity(),
+                        (q1, q2) -> q1 + q2);
+    }
+
 }
