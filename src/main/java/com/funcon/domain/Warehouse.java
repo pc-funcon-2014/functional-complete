@@ -2,6 +2,7 @@ package com.funcon.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Warehouse {
@@ -43,4 +44,14 @@ public class Warehouse {
                 .sum();
     }
 
+    public static int numberOfItems(Set<Warehouse> warehouses) {
+        return warehouses.stream()
+                .flatMap(Warehouse::items)
+                .mapToInt(Item::quantity)
+                .sum();
+    }
+
+    private Stream<Item> items() {
+        return items.stream();
+    }
 }
