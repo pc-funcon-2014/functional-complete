@@ -39,9 +39,8 @@ public class Warehouse {
 
     public int numberOfItems() {
         return items.stream()
-                .reduce(0,
-                        (acc, item) -> acc + item.quantity(),
-                        (q1, q2) -> q1 + q2);
+                .map(Item::quantity)
+                .reduce(0, (q1, q2) -> q1 + q2);
     }
 
 }
