@@ -40,7 +40,7 @@ public class Warehouse {
     public int numberOfItems() {
         return items.stream()
                 .map(Item::quantity)
-                .reduce(0, (q1, q2) -> q1 + q2);
+                .reduce(0, Integer::sum);
     }
 
 }
