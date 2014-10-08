@@ -37,7 +37,7 @@ public class Warehouse {
     }
 
     private SearchCriteria<Product> matching(final String name) {
-        return (Product product) -> product.name.equals(name);
+        return product -> product.name.equals(name);
     }
 
     public void inventory() {
@@ -49,7 +49,7 @@ public class Warehouse {
     }
 
     private SearchCriteria<Item> ofCategory(final Category category) {
-        return (Item item) -> item.isInStock() && item.isOf(category);
+        return item -> item.isInStock() && item.isOf(category);
     }
 
     public void inventory(SearchCriteria<Item> criteria) {
