@@ -26,7 +26,7 @@ public class Warehouse {
 
     public void inventory() {
         items.stream().filter(Item::isInStock)
-                .map(Item::name)
+                .map(Item::toString)
                 .forEach(System.out::println);
     }
 
