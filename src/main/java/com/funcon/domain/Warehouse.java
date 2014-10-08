@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static java.lang.Integer.compare;
+import static java.util.Comparator.comparing;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Warehouse {
@@ -57,7 +57,7 @@ public class Warehouse {
     public static Optional<Item> findItemWithLeastQuantity(Set<Warehouse> warehouses) {
         return warehouses.stream()
                 .flatMap(Warehouse::items)
-                .min((i1, i2) -> compare(i1.quantity(), i2.quantity()));
+                .min(comparing(Item::quantity));
     }
 
     private Stream<Item> items() {
