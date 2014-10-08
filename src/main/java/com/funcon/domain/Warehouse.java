@@ -6,12 +6,6 @@ import java.util.Set;
 @SuppressWarnings("UnusedDeclaration")
 public class Warehouse {
 
-    public static final SearchCriteria<Item> IN_STOCK = new SearchCriteria<Item>() {
-        @Override
-        public boolean test(Item item) {
-            return item.isInStock();
-        }
-    };
     final Set<Item> items;
 
     public Warehouse() {
@@ -41,7 +35,7 @@ public class Warehouse {
     }
 
     public void inventory() {
-        inventory(IN_STOCK);
+        inventory(Item::isInStock);
     }
 
     public void inventory(final Category category) {
